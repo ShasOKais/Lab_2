@@ -13,8 +13,9 @@ using namespace std;
 */
 //-------------------------------------------------------------------
 class Darkness { // имя класса
-public: // спецификатор доступа
+protected:
 	int x, y; // атрибуты
+public: // спецификатор доступа
 	Darkness() { // конструктор
 		/*
 		  метод класса, который предназначен для инициализации
@@ -43,17 +44,25 @@ public: // спецификатор доступа
 		*/
 		cout << "~Darkness() " << x << " " << y << endl;
 	}
+	void move(int dx, int dy) { // метод класса
+		x = dx + x;
+		y = dy + y;
+	}
+	void reset();
 };
+
+void Darkness::reset() {
+	x = 0;
+	y = 0;
+}
 
 int main() {
 	// Объекты создаются в куче
-	Darkness* Ford = new Darkness; // вызов конструктора
-	Darkness* FordStatic = new Darkness(10, 20); // динамическое создание объекта
-	Darkness* FordCopy = new Darkness(*FordStatic); // копирующий конструктор
+	Darkness *Ford = new Darkness(10, 20);
+	Ford->reset(); // для корретности вывода координат
+	Ford->move(1, 2); // можно обратиться к методу класса
 
 	delete Ford;
-	delete FordStatic;
-	delete FordCopy;
 
 	return 0;
 }
