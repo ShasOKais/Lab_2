@@ -46,10 +46,14 @@ public: // спецификатор доступа
 };
 
 int main() {
-	{
-		Darkness Ford; // вызов конструктора
-		Darkness FordStatic(10, 20); // статический объект
-		Darkness FordCopy(FordStatic); // копирующий конструктор
-	}
+	// Объекты создаются в куче
+	Darkness* Ford = new Darkness; // вызов конструктора
+	Darkness* FordStatic = new Darkness(10, 20); // динамическое создание объекта
+	Darkness* FordCopy = new Darkness(*FordStatic); // копирующий конструктор
+
+	delete Ford;
+	delete FordStatic;
+	delete FordCopy;
+
 	return 0;
 }
