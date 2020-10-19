@@ -88,9 +88,45 @@ public: // спецификатор доступа
 	}
 };
 
+class Section { // имя класса
+protected:
+	Darkness *p1;
+	Darkness *p2;
+public: // спецификатор доступа
+	Section() { // конструктор
+		/*
+		  метод класса, который предназначен для инициализации
+		  элементов класса некоторыми начальными значениями
+		*/
+		cout << "Section()\n"; // отладочный вывод
+		p1 = new Darkness;
+		p2 = new Darkness;
+	}
+	Section(int x1, int y1, int x2, int y2) { // конструктор c параментрами
+		cout << "Section(int x1, int y1, int x2, int y2)\n";
+		p1 = new Darkness(x1, y1);
+		p2 = new Darkness(x2, y2);
+	}
+	Section(const Section& s) { // копирующий конструктор
+		// Переносит все свойства из объекта которое передали
+		cout << "Section(const Section &here)\n";
+		p1 = new Darkness(*(s.p1));
+		p2 = new Darkness(*(s.p2));
+	}
+	~Section() { // деструктор
+		/*
+		  метод класса, служащий для
+		  деинициализации объекта (освобождение памяти)
+		*/
+		//cout << "~Section() " << x << " " << y << endl;
+		delete p1;
+		delete p2;
+	}
+};
+
 int main() {
-	Darkness *Ford = new ColoredDarkness(1, 2, 42);         // работают одинаково, но
-	ColoredDarkness* Ford1 = new ColoredDarkness(4, 8, 15); // вызываются разные деструкторы
+	Section *Ford = new Section;         // работают одинаково, но
+	Section* Ford1 = new Section(*Ford); // вызываются разные деструкторы
 	delete Ford;                                    
 	delete Ford1;
 	return 0;
