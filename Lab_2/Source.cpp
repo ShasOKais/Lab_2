@@ -89,9 +89,9 @@ public: // спецификатор доступа
 };
 
 int main() {
-
-	ColoredDarkness *Ford = new ColoredDarkness(1, 2, 42);
-	delete Ford;
-
+	Darkness *Ford = new ColoredDarkness(1, 2, 42);         // работают одинаково, но
+	ColoredDarkness* Ford1 = new ColoredDarkness(4, 8, 15); // вызываются разные деструкторы
+	delete Ford;                                    
+	delete Ford1;
 	return 0;
 }
